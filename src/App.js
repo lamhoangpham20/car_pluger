@@ -29,7 +29,6 @@ class App extends React.Component
    let b = this.state.plug.find(i=>i.key === event.target['digit'].value);
    console.log(b.id);
    this.setState({plugID : b.id});
-   redirect'
  }
  start = () =>
  {
