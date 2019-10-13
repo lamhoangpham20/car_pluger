@@ -4,7 +4,14 @@ import './App.css';
 import List from './component/List'
 import Start from './component/Start'
 import Digit from './component/Digit'
+import LoginView from './component/LoginView'
+import Auth from './component/Auth'
+import ExampleProtectedView from './component/ExampleProtectedView'
+import ProtectedRoute from './component/ProtectedRoute'
+import MapContainer from './component/MapContainer'
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import axios from 'axios';
+import constants from './constants.json';
 
 class App extends React.Component
 {
@@ -15,8 +22,23 @@ class App extends React.Component
                       textInput: "",
                       startTime:0,
                       endTime:0,
-                      plugID: null
+                      plugID: null,
+                      isAuthenticated: false,
+                      someData: null
     }
+  }
+  onLogin = () => {
+  this.setState({ isAuthenticated: true })
+  }
+
+  onLoginFail = () => {
+  this.setState({ isAuthenticated: false });
+  console.log("Login failed");
+  }
+  loadProtectedData = () => {
+    axios.get(constants.baseAddress + '/hello-protected', Auth.getAxiosAuth()).then(results => {
+      this.setState({ someData: results.data });
+    })
   }
   newInput = (event)=>{
    this.setState({textInput: event.target.value });
@@ -51,6 +73,24 @@ class App extends React.Component
 <Route path="/" exact render={ routeProps => <List plug={this.state.plug} newInput={this.newInput} textInput={this.state.textInput} {...routeProps}/> }/>
 <Route path="/start" exact render={ routeProps => <Start start={this.start} stop={this.stop}  {...routeProps}/> }/>
 <Route path="/digit" exact render={ routeProps => <Digit choosePlug={this.choosePlug} {...routeProps}/> }/>
+<Route path="/login" exact render={
+          (routeProps) =>
+            <LoginView
+              loginSuccess = { this.onLogin }
+              loginFail = { this.onLoginFail }
+              userInfo={ this.state.userInfo }
+              redirectPathOnSuccess="/example"
+              {...routeProps}
+              />
+        } />
+        <ProtectedRoute isAuthenticated={this.state.isAuthenticated} path="/example" exact render={
+            (routeProps) =>
+              <ExampleProtectedView
+                loadProtectedData={ this.loadProtectedData }
+                someData={ this.state.someData }
+                />
+          }>
+        </ProtectedRoute>
 </Router>
 
 )
