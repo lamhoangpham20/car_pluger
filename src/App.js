@@ -17,8 +17,8 @@ class App extends React.Component
 {
   constructor(props){
     super(props);
-    this.state={plug:[{id:1,key:'VUW1',name:'plug1',type:'slow',connector:'Type 2',electricity:22,address:"Torikatu 28"},
-                      {id:2,key:'E12T',name:'plug2', type:'fast',connector:'CSS',electricity:100,address:"Kirkkokatu 28"}],
+    this.state={plug:[{id:1,key:'VUW1',name:'plug1',type:'slow',connector:'Type 2',electricity:22,address:"Torikatu 28", lat: 65.01236, lng: 25.46816},
+                      {id:2,key:'E12T',name:'plug2', type:'fast',connector:'CSS',electricity:100,address:"Kirkkokatu 28",  lat: 65.01272, lng: 25.46890}],
                       textInput: "",
                       startTime:0,
                       endTime:0,

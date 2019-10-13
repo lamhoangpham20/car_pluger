@@ -2,20 +2,33 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 const mapStyles = {
-  width: '100%',
+  width: '85%',
   height: '100%',
-  float: 'left'
 };
 
 export class MapContainer extends Component {
+  displayMarkers = () => {
+    return this.props.plug.map(i => {
+      return <Marker position={{
+       lat: i.lat,
+       lng: i.lng
+     }}
+     onClick={() => console.log("You clicked me!")} />
+    })
+  }
   render() {
     return (
       <Map
         google={this.props.google}
-        zoom={8}
+        zoom={14}
         style={mapStyles}
-        initialCenter={{lat: 47.444, lng: -122.176}}>
-        <Marker position={{ lat: 48.00, lng: -122.00}} />
+        initialCenter={{lat: 65.01236, lng: 25.46816}}>
+        {this.props.plug.map(i =><Marker key={i.id} position={{
+                                                              lat: i.lat,
+                                                              lng: i.lng
+                                                              }}
+         onClick={() => console.log("You clicked me!")} />)}
+
       </Map>
     );
   }
