@@ -1,6 +1,9 @@
 import React from "react"
+import { Redirect, Route } from "react-router-dom";
 export default function Digit(props)
 {
+  if(props.isAuthenticated)
+  {
   return(
     <div>
     <button onClick={() => props.history.goBack()}>Back</button>
@@ -10,5 +13,10 @@ export default function Digit(props)
     </form>
     </div>
   )
+}
+else{
+  return(
+    <React.Fragment><Redirect to='/' /></React.Fragment>
+)}
 
 }

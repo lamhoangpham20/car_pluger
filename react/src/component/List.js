@@ -8,25 +8,47 @@ import { Map, GoogleApiWrapper } from 'google-maps-react';
 export default function List(props)
 {
 const plug=props.plug;
+const show_plug = props.show_plug;
+const marker=props.marker;
+if(marker === null)
+{
 return(
   <div>
   <div id={styles.box}>
-  <Link to={'/login'}><button>Login</button></Link>
-<button onClick={() => props.history.goBack()}>Back</button>
-    <input type='text' onChange={props.newInput}/>
+  <div><input type='text' name="search" onChange={props.newInput}/>
+  <button onClick={props.search}>Search</button></div>
+  <div><Link to={'/login'}><button>Login</button></Link></div>
+  <div><Link to={'/register'}><button>Register</button></Link></div>
     <div><Link to={'/start'}><button>Start process</button></Link></div>
-    <div><Link to={'/digit'}><button>Start process</button></Link></div>
-    <ul>
-    {props.plug.filter(i => i.address.toUpperCase().includes(props.textInput.toUpperCase())).map(i =>
-
-      <div key={ i.id }><Items {...i} key={ i.id }/></div>)}
-
-  </ul>
+    <div><Link to={'/digit'}><button>Verify</button></Link></div>
+    {props.searchPlug.map(i=><div><button onClick={()=>show_plug(i.id)}>{i.name}</button></div>)}
   </div>
   <div className={styles.map}>
-  <MapContainer plug={plug}/>
+  <MapContainer plug={plug} show_plug={props.show_plug} centerLat={props.centerLat} centerLng={props.centerLng}/>
   </div>
   </div>
 
 )
+}
+else {
+  return(
+    <div>
+    <div id={styles.box}>
+    <div><input type='text' onChange={props.newInput}/>
+    <button onClick={props.search}>Search</button></div>
+    <div><Link to={'/login'}><button>Login</button></Link></div>
+    <div><Link to={'/start'}><button>Start process</button></Link></div>
+    <div><Link to={'/register'}><button>Register</button></Link></div>
+    <div><Link to={'/digit'}><button>Verify</button></Link></div>
+    <ul>
+    <Items {...marker}/>
+    </ul>
+    </div>
+    <div className={styles.map}>
+    <MapContainer plug={plug} show_plug={props.show_plug} centerLat={props.centerLat} centerLng={props.centerLng}/>
+    </div>
+    </div>
+  );
+
+}
 }

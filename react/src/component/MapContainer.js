@@ -7,27 +7,18 @@ const mapStyles = {
 };
 
 export class MapContainer extends Component {
-  displayMarkers = () => {
-    return this.props.plug.map(i => {
-      return <Marker position={{
-       lat: i.lat,
-       lng: i.lng
-     }}
-     onClick={() => console.log("You clicked me!")} />
-    })
-  }
   render() {
     return (
       <Map
         google={this.props.google}
         zoom={14}
         style={mapStyles}
-        initialCenter={{lat: 65.01236, lng: 25.46816}}>
+        initialCenter={{lat:this.props.centerLat, lng: this.props.centerLng}}>
         {this.props.plug.map(i =><Marker key={i.id} position={{
                                                               lat: i.lat,
                                                               lng: i.lng
                                                               }}
-         onClick={() => console.log("You clicked me!")} />)}
+         onClick={() => this.props.show_plug(i.id)} />)}
 
       </Map>
     );
