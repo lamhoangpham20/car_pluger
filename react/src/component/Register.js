@@ -11,7 +11,7 @@ export default function Register(props)
           Username <input type="text" name="username" />
         </div>
         <div>
-          Password <input type="text" name="password" />
+          Password <input type="password" name="password" />
         </div>
         <div>
           <button type="submit">Register</button>
