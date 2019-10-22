@@ -72,7 +72,7 @@ else{
         <div id={styles.box}>
         <div><input type='text' name="search" onChange={props.newInput}/>
         <button onClick={props.search}>Search</button></div>
-          {props.searchPlug.map(i=><div><Link to={'/search'}><button className={styles.searchList} onClick={()=>show_plug(i.id)}>{i.name}</button></Link></div>)}
+          {props.searchPlug.map(i=><div><Link to={'/search'}><button className={styles.searchList} onClick={()=>show_plug(i.id)}>{i.name},{i.city}</button></Link></div>)}
         </div>
         <div className={styles.map}>
         <MapContainer plug={plug} show_plug={props.show_plug} centerLat={props.centerLat} centerLng={props.centerLng}/>

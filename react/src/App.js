@@ -87,7 +87,7 @@ class App extends React.Component
    }
    else
    {
-      console.log();
+      this.setState({plugVerify:null});
    }
  }
  start = () =>

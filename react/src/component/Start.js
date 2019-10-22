@@ -29,7 +29,7 @@ export default function Start(props)
   return(
     <div><button onClick={() => props.history.goBack()}>Back</button>
     <div id={styles.center}>
-    <div>{getHour()}:{getMinute()}:{getSecond()}</div>
+    <div className={styles.number}>{getHour()}:{getMinute()}:{getSecond()}</div>
     <button className={styles.button} onClick={props.start}>Start</button>
     <button className={styles.button} onClick={props.stop}>Stop</button>
     <div>Your payment is: {money}e</div>

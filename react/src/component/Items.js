@@ -22,8 +22,9 @@ export default function Items(props){
           <div>
           <img src={props.image}/>
           </div>
-          <div>{props.name}</div>
-          <div> {props.address}-{props.city}</div>
+          <div>Name: {props.name}</div>
+          <div>Key: {props.digit}</div>
+          <div> {props.address},{props.city}</div>
           <div>Type: {props.type}</div>
           <div>Connectors:{props.connector}</div>
           <div>Price: {price}</div>
